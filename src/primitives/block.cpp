@@ -6,10 +6,10 @@
 #include <primitives/block.h>
 
 #include <hash.h>
+#include <streams.h>
 #include <tinyformat.h>
 #include <utilstrencodings.h>
 #include <crypto/common.h>
-#include <crypto/scrypt.h>
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -18,9 +18,11 @@ uint256 CBlockHeader::GetHash() const
 
 uint256 CBlockHeader::GetPoWHash() const
 {
-    uint256 thash;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
-    return thash;
+    // * Get Proof-of-Work Hash function was using Scrypt, now using Dash's X11.
+    std::vector<unsigned char> vch(80);
+    CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
+    ss << *this;
+    return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
 }
 
 std::string CBlock::ToString() const

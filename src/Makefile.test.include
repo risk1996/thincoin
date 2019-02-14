@@ -97,7 +97,7 @@ BITCOIN_TESTS += \
   wallet/test/crypto_tests.cpp
 endif
 
-test_test_thincoin_SOURCES = $(BITCOIN_TESTS) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
+test_test_thincoin_SOURCES = $(BITCOIN_TESTS) $(X11_FILES) $(JSON_TEST_FILES) $(RAW_TEST_FILES)
 test_test_thincoin_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(TESTDEFS) $(EVENT_CFLAGS)
 test_test_thincoin_LDADD =
 if ENABLE_WALLET
