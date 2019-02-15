@@ -687,8 +687,8 @@
         <translation>Această etichetă devine roşie, dacă orice beneficiar primeşte o sumă mai mică decât pragul curent pentru praf.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Poate varia +/- %1 satoshi pentru fiecare intrare.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Poate varia +/- %1 microcent pentru fiecare intrare.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2093,8 +2093,8 @@
         <translation>per kilooctet</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Daca taxa personalizata este setata la 1000 satoshi si tranzactia este doar de 250 bytes, atunci "per kilobyte" plateste o taxa de doar 250 satoshi, in timp ce "total minim" plateste 1000 satoshi. Pentru tranzactii mai mari de un kilobyte ambele platesc per kilobyte. </translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Daca taxa personalizata este setata la 1000 microcent si tranzactia este doar de 250 bytes, atunci "per kilobyte" plateste o taxa de doar 250 microcent, in timp ce "total minim" plateste 1000 microcent. Pentru tranzactii mai mari de un kilobyte ambele platesc per kilobyte. </translation>
     </message>
     <message>
         <source>Hide</source>

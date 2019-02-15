@@ -691,8 +691,8 @@
         <translation>Denne mærkat bliver rød, hvis en eller flere modtagere modtager et beløb, der er mindre end den aktuelle støvgrænse.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Kan variere med ±%1 satoshi per input.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Kan variere med ±%1 microcent per input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2105,8 +2105,8 @@
         <translation>pr. kilobyte</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Hvis det brugertilpassede gebyr er sat til 1000 satoshis, og transaktionen kun fylder 250 byte, betaler “pr. kilobyte” kun 250 satoshis i gebyr, mens “total mindst” betaler 1000 satoshis. For transaktioner større end en kilobyte betaler begge pr. kilobyte.</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Hvis det brugertilpassede gebyr er sat til 1000 microcents, og transaktionen kun fylder 250 byte, betaler “pr. kilobyte” kun 250 microcents i gebyr, mens “total mindst” betaler 1000 microcents. For transaktioner større end en kilobyte betaler begge pr. kilobyte.</translation>
     </message>
     <message>
         <source>Hide</source>

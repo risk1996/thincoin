@@ -683,8 +683,8 @@
         <translation>Tämä nimike muuttuu punaiseksi, jos jokin vastaanottajista on saamassa tämänhetkistä tomun rajaa pienemmän summan.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Saattaa vaihdella +/- %1 satoshia per syöte.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Saattaa vaihdella +/- %1 microcenta per syöte.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2049,8 +2049,8 @@
         <translation>per kilotavu</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Jos määritelty palkkio on asetettu 1000 satoshiin ja siirto on vain 250 tavua, niin "kilotavua kohti" maksaa vain 250 satoshin palkkion, kun "vähintään" maksaa 1000 satoshia. Kilotavua suuremmilla siirroilla molemmat maksavat jokaista kilotavua kohti.</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Jos määritelty palkkio on asetettu 1000 microcentin ja siirto on vain 250 tavua, niin "kilotavua kohti" maksaa vain 250 microcentn palkkion, kun "vähintään" maksaa 1000 microcenta. Kilotavua suuremmilla siirroilla molemmat maksavat jokaista kilotavua kohti.</translation>
     </message>
     <message>
         <source>Hide</source>

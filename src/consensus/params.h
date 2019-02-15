@@ -48,7 +48,8 @@ struct BIP9Deployment {
  */
 struct Params {
     uint256 hashGenesisBlock;
-    int nSubsidyHalvingInterval;
+    int32_t nSubsidyHalvingInterval;
+    int32_t nInitialSubsidy;
     /** Block height at which BIP16 becomes active */
     int BIP16Height;
     /** Block height and hash at which BIP34 becomes active */

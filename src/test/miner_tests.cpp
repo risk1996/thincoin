@@ -113,11 +113,11 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     tx.vin[0].prevout.n = 0;
     tx.vout.resize(1);
     tx.vout[0].nValue = 5000000000LL - 1000;
-    // This tx has a low fee: 1000 satoshis
+    // This tx has a low fee: 1000 microcents
     uint256 hashParentTx = tx.GetHash(); // save this txid for later use
     mempool.addUnchecked(hashParentTx, entry.Fee(1000).Time(GetTime()).SpendsCoinbase(true).FromTx(tx));
 
-    // This tx has a medium fee: 10000 satoshis
+    // This tx has a medium fee: 10000 microcents
     tx.vin[0].prevout.hash = txFirst[1]->GetHash();
     tx.vout[0].nValue = 5000000000LL - 10000;
     uint256 hashMediumFeeTx = tx.GetHash();
@@ -125,7 +125,7 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
 
     // This tx has a high fee, but depends on the first transaction
     tx.vin[0].prevout.hash = hashParentTx;
-    tx.vout[0].nValue = 5000000000LL - 1000 - 50000; // 50k satoshi fee
+    tx.vout[0].nValue = 5000000000LL - 1000 - 50000; // 50k microcent fee
     uint256 hashHighFeeTx = tx.GetHash();
     mempool.addUnchecked(hashHighFeeTx, entry.Fee(50000).Time(GetTime()).SpendsCoinbase(false).FromTx(tx));
 
@@ -173,7 +173,7 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     tx.vin[0].prevout.hash = txFirst[2]->GetHash();
     tx.vout.resize(2);
     tx.vout[0].nValue = 5000000000LL - 100000000;
-    tx.vout[1].nValue = 100000000; // 1BTC output
+    tx.vout[1].nValue = 100000000; // 1THC output
     uint256 hashFreeTx2 = tx.GetHash();
     mempool.addUnchecked(hashFreeTx2, entry.Fee(0).SpendsCoinbase(true).FromTx(tx));
 
@@ -195,7 +195,7 @@ void TestPackageSelection(const CChainParams& chainparams, CScript scriptPubKey,
     // This tx will be mineable, and should cause hashLowFeeTx2 to be selected
     // as well.
     tx.vin[0].prevout.n = 1;
-    tx.vout[0].nValue = 100000000 - 10000; // 10k satoshi fee
+    tx.vout[0].nValue = 100000000 - 10000; // 10k microcent fee
     mempool.addUnchecked(tx.GetHash(), entry.Fee(10000).FromTx(tx));
     pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey);
     BOOST_CHECK(pblocktemplate->block.vtx[8]->GetHash() == hashLowFeeTx2);
@@ -257,7 +257,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     // Just to make sure we can still make simple blocks
     BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
 
-    const CAmount BLOCKSUBSIDY = 50*COIN;
+    const CAmount BLOCKSUBSIDY = chainParams->GetConsensus().nInitialSubsidy * COIN;
     const CAmount LOWFEE = CENT;
     const CAmount HIGHFEE = COIN;
     const CAmount HIGHERFEE = 4*COIN;

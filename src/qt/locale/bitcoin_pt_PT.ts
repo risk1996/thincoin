@@ -691,8 +691,8 @@
         <translation>Esta etiqueta fica vermelha se qualquer destinatário recebe um valor menor que o limite de dinheiro.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Pode variar +/- %1 satoshi(s) por input.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Pode variar +/- %1 microcent(s) por input.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2042,8 +2042,8 @@
         <translation>por kilobyte</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Se a taxa personalizada estiver definida para 1.000 satoshis e a transação é de apenas 250 bytes, então paga apenas 250 satoshis "por kilobyte" na taxa, enquanto em "total pelo menos" paga 1.000 satoshis. Para transações superiores a um kilobyte ambos pagam por kilobyte.</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Se a taxa personalizada estiver definida para 1.000 microcents e a transação é de apenas 250 bytes, então paga apenas 250 microcents "por kilobyte" na taxa, enquanto em "total pelo menos" paga 1.000 microcents. Para transações superiores a um kilobyte ambos pagam por kilobyte.</translation>
     </message>
     <message>
         <source>Hide</source>

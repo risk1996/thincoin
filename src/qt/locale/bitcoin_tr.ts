@@ -691,8 +691,8 @@
         <translation>Eğer herhangi bir alıcı mevcut toz eşiğinden daha düşük bir tutar alırsa bu etiket kırmızıya dönüşür.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Girdi başına +/- %1 satoshi değişebilir.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Girdi başına +/- %1 microcent değişebilir.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2077,7 +2077,7 @@
         <translation>kilobayt başı</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
         <translation>Eğer özel ücret 1000 satoşi olarak ayarlandıysa ve işlem sadece 250 baytsa, "kilobayt başı" ücret olarak sadece 250 satoşi öder ve "toplam asgari" 1000 satoşi öder. Bir kilobayttan yüksek işlemler için ikisi de kilobayt başı ödeme yapar.</translation>
     </message>
     <message>

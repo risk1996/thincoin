@@ -679,8 +679,8 @@
         <translation>受信したレシピが現在のダスト閾値よりも残高が少ない場合、ラベルは赤になります。</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>入力ごとにsatoshiの+/- %1に変更できます。</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>入力ごとにmicrocentの+/- %1に変更できます。</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1965,8 +1965,8 @@
         <translation>キロバイトごと</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>カスタム料金が1000 satoshiで処理が250バイトのみの場合、料金はキロバイトあたりは250 satoshiのみとなり、最新の合計は1000 satoshiまで支払います。処理が1キロバイトよりも大きい場合、キロバイトごとに支払いが行われます。</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>カスタム料金が1000 microcentで処理が250バイトのみの場合、料金はキロバイトあたりは250 microcentのみとなり、最新の合計は1000 microcentまで支払います。処理が1キロバイトよりも大きい場合、キロバイトごとに支払いが行われます。</translation>
     </message>
     <message>
         <source>Hide</source>

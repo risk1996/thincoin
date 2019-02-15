@@ -683,8 +683,8 @@
         <translation>Tidak</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Dapat bervariasi +/- %1 satoshi per input.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Dapat bervariasi +/- %1 microcent per input.</translation>
     </message>
     <message>
         <source>(no label)</source>

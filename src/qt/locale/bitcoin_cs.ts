@@ -691,8 +691,8 @@
         <translation>Popisek zčervená, pokud má některý příjemce obdržet částku menší, než je aktuální práh pro prach.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Může se lišit o +/– %1 satoshi na každý vstup.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Může se lišit o +/– %1 microcent na každý vstup.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2081,8 +2081,8 @@
         <translation>za kilobajt</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Pokud je vlastní poplatek nastavený na 1000 satoshi a transakce má pouze 250 bajtů, tak „za kilobajt“ zaplatí poplatek jen 250 satoshi, zatímco „přinejmenším“ zaplatí 1000 satoshi. Pro transakce větší než kilobajt obě možnosti platí za kilobajt.</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Pokud je vlastní poplatek nastavený na 1000 microcent a transakce má pouze 250 bajtů, tak „za kilobajt“ zaplatí poplatek jen 250 microcent, zatímco „přinejmenším“ zaplatí 1000 microcent. Pro transakce větší než kilobajt obě možnosti platí za kilobajt.</translation>
     </message>
     <message>
         <source>Hide</source>

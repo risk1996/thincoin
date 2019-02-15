@@ -687,7 +687,7 @@
         <translation>תווית זו הופכת לאדומה אם מישהו מהנמענים מקבל סכום נמוך יותר מסף האבק הנוכחי.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
         <translation>יכול להשתנות במגמה של +/- %1 סנטושי לקלט.</translation>
     </message>
     <message>

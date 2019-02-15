@@ -691,8 +691,8 @@
         <translation>Dit label wordt rood, als een ontvanger een bedrag van minder dan de huidige dust-drempel gekregen heeft.</translation>
     </message>
     <message>
-        <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Kan per input +/- %1 satoshi(s)  variëren.</translation>
+        <source>Can vary +/- %1 microcent(s) per input.</source>
+        <translation>Kan per input +/- %1 microcent(s)  variëren.</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -2105,8 +2105,8 @@
         <translation>per kilobyte</translation>
     </message>
     <message>
-        <source>If the custom fee is set to 1000 satoshis and the transaction is only 250 bytes, then "per kilobyte" only pays 250 satoshis in fee, while "total at least" pays 1000 satoshis. For transactions bigger than a kilobyte both pay by kilobyte.</source>
-        <translation>Als de aangepaste toeslag is ingesteld op 1000 satoshis en de transactie is maar 250 bytes, dan wordt bij "per kilobyte" 250 satoshis aan toeslag berekend, terwijl er bij "totaal tenminste" 1000 satoshis worden berekend. Voor transacties die groter zijn dan een kilobyte, wordt in beide gevallen per kilobyte de toeslag berekend.</translation>
+        <source>If the custom fee is set to 1000 microcents and the transaction is only 250 bytes, then "per kilobyte" only pays 250 microcents in fee, while "total at least" pays 1000 microcents. For transactions bigger than a kilobyte both pay by kilobyte.</source>
+        <translation>Als de aangepaste toeslag is ingesteld op 1000 microcents en de transactie is maar 250 bytes, dan wordt bij "per kilobyte" 250 microcents aan toeslag berekend, terwijl er bij "totaal tenminste" 1000 microcents worden berekend. Voor transacties die groter zijn dan een kilobyte, wordt in beide gevallen per kilobyte de toeslag berekend.</translation>
     </message>
     <message>
         <source>Hide</source>
