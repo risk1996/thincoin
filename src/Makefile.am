@@ -360,6 +360,7 @@ libbitcoin_common_a_SOURCES = \
   netaddress.cpp \
   netbase.cpp \
   policy/feerate.cpp \
+  pow.cpp \
   protocol.cpp \
   scheduler.cpp \
   script/sign.cpp \

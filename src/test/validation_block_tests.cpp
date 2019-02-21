@@ -71,8 +71,12 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock)
 {
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
-    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
-        ++(pblock->nNonce);
+    while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, chainActive.Tip()->GetBlockSaltedMerkle(), Params().GetConsensus())) {
+        ++pblock->nMerkleSalt;
+    }
+
+    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus())) {
+        ++pblock->nNonce;
     }
 
     return pblock;

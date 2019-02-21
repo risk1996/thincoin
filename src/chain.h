@@ -211,6 +211,7 @@ public:
     uint256 hashMerkleRoot;
     uint32_t nTime;
     uint32_t nBits;
+    uint32_t nMerkleSalt;
     uint32_t nNonce;
 
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
@@ -239,6 +240,7 @@ public:
         hashMerkleRoot = uint256();
         nTime          = 0;
         nBits          = 0;
+        nMerkleSalt    = 0;
         nNonce         = 0;
     }
 
@@ -255,6 +257,7 @@ public:
         hashMerkleRoot = block.hashMerkleRoot;
         nTime          = block.nTime;
         nBits          = block.nBits;
+        nMerkleSalt    = block.nMerkleSalt;
         nNonce         = block.nNonce;
     }
 
@@ -285,6 +288,7 @@ public:
         block.hashMerkleRoot = hashMerkleRoot;
         block.nTime          = nTime;
         block.nBits          = nBits;
+        block.nMerkleSalt    = nMerkleSalt;
         block.nNonce         = nNonce;
         return block;
     }
@@ -299,6 +303,11 @@ public:
         return GetBlockHeader().GetPoWHash();
     }
 
+    uint256 GetBlockSaltedMerkle() const
+    {
+        return GetBlockHeader().GetSaltedMerkle();
+    }
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
@@ -307,6 +316,11 @@ public:
     int64_t GetBlockTimeMax() const
     {
         return (int64_t)nTimeMax;
+    }
+
+    bool operator==(CBlockHeader block)
+    {
+        return GetBlockHeader() == block;
     }
 
     static constexpr int nMedianTimeSpan = 11;
@@ -409,6 +423,7 @@ public:
         READWRITE(hashMerkleRoot);
         READWRITE(nTime);
         READWRITE(nBits);
+        READWRITE(nMerkleSalt);
         READWRITE(nNonce);
     }
 
@@ -420,6 +435,7 @@ public:
         block.hashMerkleRoot  = hashMerkleRoot;
         block.nTime           = nTime;
         block.nBits           = nBits;
+        block.nMerkleSalt     = nMerkleSalt;
         block.nNonce          = nNonce;
         return block.GetHash();
     }
@@ -470,12 +486,24 @@ public:
         return (*this)[pindex->nHeight] == pindex;
     }
 
+    /** Find the predecessor of a block in this chain, or nullptr if the given index is not found or is the genesis. */
+    CBlockIndex *Previous(const CBlockIndex *pindex) const {
+        if (Contains(pindex))
+            return (*this)[pindex->nHeight - 1];
+        else
+            return nullptr;
+    }
+
     /** Find the successor of a block in this chain, or nullptr if the given index is not found or is the tip. */
     CBlockIndex *Next(const CBlockIndex *pindex) const {
         if (Contains(pindex))
             return (*this)[pindex->nHeight + 1];
         else
             return nullptr;
+    }
+
+    CBlockIndex *FindMatchingHeader(const CBlockHeader blockHeader) const {
+        return std::find(vChain[0], vChain[Height()], blockHeader);
     }
 
     /** Return the maximal height in the chain. Is equal to chain.Tip() ? chain.Tip()->nHeight : -1. */

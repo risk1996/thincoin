@@ -25,15 +25,24 @@ uint256 CBlockHeader::GetPoWHash() const
     return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
 }
 
+uint256 CBlockHeader::GetSaltedMerkle() const
+{
+    // * Get Proof-of-Work Salted Merkle Tree Root using X11.
+    std::vector<unsigned char> vch(80);
+    CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
+    ss << this->hashMerkleRoot << this->nMerkleSalt;
+    return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
+}
+
 std::string CBlock::ToString() const
 {
     std::stringstream s;
-    s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%u)\n",
+    s << strprintf("CBlock(hash=%s, ver=0x%08x, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nMerkleSalt=%u, nNonce=%u, vtx=%u)\n",
         GetHash().ToString(),
         nVersion,
         hashPrevBlock.ToString(),
         hashMerkleRoot.ToString(),
-        nTime, nBits, nNonce,
+        nTime, nBits, nMerkleSalt, nNonce,
         vtx.size());
     for (const auto& tx : vtx) {
         s << "  " << tx->ToString() << "\n";

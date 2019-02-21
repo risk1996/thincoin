@@ -15,7 +15,10 @@
 
 #include <chainparamsseeds.h>
 
-static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+#include <pow.h>
+#include <arith_uint256.h>
+
+static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesisOutputScript, uint32_t nTime, uint32_t nMerkleSalt, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     CMutableTransaction txNew;
     txNew.nVersion = 1;
@@ -26,10 +29,11 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
     txNew.vout[0].scriptPubKey = genesisOutputScript;
 
     CBlock genesis;
-    genesis.nTime    = nTime;
-    genesis.nBits    = nBits;
-    genesis.nNonce   = nNonce;
-    genesis.nVersion = nVersion;
+    genesis.nTime       = nTime;
+    genesis.nBits       = nBits;
+    genesis.nMerkleSalt = nMerkleSalt;
+    genesis.nNonce      = nNonce;
+    genesis.nVersion    = nVersion;
     genesis.vtx.push_back(MakeTransactionRef(std::move(txNew)));
     genesis.hashPrevBlock.SetNull();
     genesis.hashMerkleRoot = BlockMerkleRoot(genesis);
@@ -47,11 +51,11 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  *     CTxOut(nValue=50.00000000, scriptPubKey=0x5F1DF16B2B704C8A578D0B)
  *   vMerkleTree: 4a5e1e
  */
-static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
+static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nMerkleSalt, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     const char* pszTimestamp = "NY Times 05/Oct/2011 Steve Jobs, Apple’s Visionary, Dies at 56";
     const CScript genesisOutputScript = CScript() << ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9") << OP_CHECKSIG;
-    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
+    return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nMerkleSalt, nNonce, nBits, nVersion, genesisReward);
 }
 
 void CChainParams::UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout)
@@ -114,15 +118,44 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 32-bit integer with any alignment.
          */
-        pchMessageStart[0] = 0xfb;
-        pchMessageStart[1] = 0xc0;
-        pchMessageStart[2] = 0xb6;
-        pchMessageStart[3] = 0xdb;
-        nDefaultPort = 7814; // Was 9333
+        pchMessageStart[0] = 0xf9;
+        pchMessageStart[1] = 0xe8;
+        pchMessageStart[2] = 0xe7;
+        pchMessageStart[3] = 0xd6;
+        nDefaultPort = 7814;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1317972665, 2084524493, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1551398400, 0, 0, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+
+        CBlock *pblock = &genesis;
+        bool fNegative;
+        bool fOverflow;
+        arith_uint256 bnTarget;
+        bnTarget.SetCompact(0x1e0ffff0, &fNegative, &fOverflow);
+        const unsigned char midArrayHex[] =
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
+        const arith_uint256 mid = UintToArith256(uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32)));
+        arith_uint256 low = mid - bnTarget, high = mid + bnTarget, PoWMerkle, PoWHash;
+        while (PoWMerkle < low || PoWMerkle > high) {
+            ++pblock->nMerkleSalt;
+            PoWMerkle = UintToArith256(genesis.GetSaltedMerkle());
+        }
+        low = PoWMerkle;
+        high = PoWMerkle + bnTarget;
+        while (PoWHash < low || PoWHash > high) {
+            ++pblock->nNonce;
+            PoWHash = UintToArith256(genesis.GetPoWHash());
+        }
+        
         consensus.hashGenesisBlock = genesis.GetHash();
+        printf("Salt  : %d\n", genesis.nMerkleSalt);
+        printf("Nonce : %d\n", genesis.nNonce);
+        printf("Target: %s\n", bnTarget.ToString().c_str());
+        printf("Hash  : %s\n", genesis.GetHash().ToString().c_str());
+        printf("PoW   : %s\n", genesis.GetPoWHash().ToString().c_str());
+        printf("Merkle: %s\n", genesis.hashMerkleRoot.ToString().c_str());
+        printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
         assert(consensus.hashGenesisBlock == uint256S("0x12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2"));
         assert(genesis.hashMerkleRoot == uint256S("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
 
@@ -220,14 +253,14 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x1efb29c8187d5a496a33377941d1df415169c3ce5d8c05d055f25b683ec3f9a3"); //612653
 
-        pchMessageStart[0] = 0xfd;
-        pchMessageStart[1] = 0xd2;
-        pchMessageStart[2] = 0xc8;
-        pchMessageStart[3] = 0xf1;
-        nDefaultPort = 19335;
+        pchMessageStart[0] = 0xf8;
+        pchMessageStart[1] = 0xe7;
+        pchMessageStart[2] = 0xe6;
+        pchMessageStart[3] = 0xd5;
+        nDefaultPort = 17812;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1486949366, 293345, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1551398400, 0, 293345, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x4966625a4b2851d9fdee139e56211a0d88575f59ed816ff5e6a63deb4e3e29a0"));
         assert(genesis.hashMerkleRoot == uint256S("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
@@ -307,14 +340,14 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        pchMessageStart[0] = 0xfa;
-        pchMessageStart[1] = 0xbf;
-        pchMessageStart[2] = 0xb5;
-        pchMessageStart[3] = 0xda;
-        nDefaultPort = 19444;
+        pchMessageStart[0] = 0xf7;
+        pchMessageStart[1] = 0xe6;
+        pchMessageStart[2] = 0xe5;
+        pchMessageStart[3] = 0xd4;
+        nDefaultPort = 17811;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1296688602, 0, 0x207fffff, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1551398400, 0, 0, 0x207fffff, 1, consensus.nInitialSubsidy * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x530827f38f93b43ed12af0b3ad25a288dc02ed74d6d7857862df51fc56c416f9"));
         assert(genesis.hashMerkleRoot == uint256S("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
