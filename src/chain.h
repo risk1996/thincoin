@@ -486,14 +486,6 @@ public:
         return (*this)[pindex->nHeight] == pindex;
     }
 
-    /** Find the predecessor of a block in this chain, or nullptr if the given index is not found or is the genesis. */
-    CBlockIndex *Previous(const CBlockIndex *pindex) const {
-        if (Contains(pindex))
-            return (*this)[pindex->nHeight - 1];
-        else
-            return nullptr;
-    }
-
     /** Find the successor of a block in this chain, or nullptr if the given index is not found or is the tip. */
     CBlockIndex *Next(const CBlockIndex *pindex) const {
         if (Contains(pindex))

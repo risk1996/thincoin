@@ -2981,14 +2981,29 @@ static bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, 
 
 static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
-    // Check salted merkle tree root
-    if (fCheckPOW && !CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, chainActive.Previous(chainActive.FindMatchingHeader(block))->GetBlockSaltedMerkle(), consensusParams))
-        return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "salted merkle failed");
+    if (fCheckPOW) {
+        printf("block to match %d %d %s\n", block.IsNull() ? 1 : 0, block.nNonce, block.hashPrevBlock.ToString().c_str());
+        printf("block to match hash %s\n", block.GetHash().ToString().c_str());
+        printf("genesis block  hash %s\n", consensusParams.hashGenesisBlock.ToString().c_str());
+        // Check salted merkle tree root
+        if (block.GetHash() == consensusParams.hashGenesisBlock) {
+            const unsigned char midArrayHex[] =
+                "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+                "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
+            if (!CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32)), consensusParams))
+                return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "salted merkle failed");
+        }
+        else {
+            CBlockIndex *pindex = chainActive.FindMatchingHeader(block);
+            CBlockIndex *pprev = pindex->GetAncestor(pindex->nHeight - 1);
+            if (!CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, pprev->GetBlockPoWHash(), consensusParams))
+                return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "salted merkle failed");
+        }
 
-    // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(), block.nBits, block.GetSaltedMerkle(), consensusParams))
-        return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "proof of work failed");
-
+        // Check proof of work matches claimed amount
+        if (!CheckProofOfWork(block.GetPoWHash(), block.nBits, block.GetSaltedMerkle(), consensusParams))
+            return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "proof of work failed");
+    }
     return true;
 }
 

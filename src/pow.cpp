@@ -121,7 +121,7 @@ bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
     targetUpBound  = UintToArith256(prevPoW);
-    targetLowBound = targetLowBound - bnTarget;
+    targetLowBound = targetUpBound - bnTarget;
 
     arith_uint256 proof = UintToArith256(saltedMerkle);
 
