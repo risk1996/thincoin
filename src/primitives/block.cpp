@@ -34,6 +34,15 @@ uint256 CBlockHeader::GetSaltedMerkle() const
     return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
 }
 
+std::string CBlockHeader::ToString() const
+{
+    return strprintf("CBlockHeader(hashPrevBlock=%s, hashMerkleRoot=%s, hashBlock=%s, nTime=%u, nBits=%08x, nMerkleSalt=%u, nNonce=%u)",
+        hashPrevBlock.ToString(),
+        hashMerkleRoot.ToString(),
+        GetHash().ToString(),
+        nTime, nBits, nMerkleSalt, nNonce);
+}
+
 std::string CBlock::ToString() const
 {
     std::stringstream s;

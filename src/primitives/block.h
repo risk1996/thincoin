@@ -74,6 +74,8 @@ public:
         return (int64_t)nTime;
     }
 
+    std::string ToString() const;
+
     bool operator==(CBlockHeader block)
     {
         return (nVersion == block.nVersion && hashPrevBlock == block.hashPrevBlock &&
