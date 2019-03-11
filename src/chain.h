@@ -318,7 +318,7 @@ public:
         return (int64_t)nTimeMax;
     }
 
-    bool operator==(CBlockHeader block)
+    bool operator==(const CBlockHeader block)
     {
         return GetBlockHeader() == block;
     }
@@ -494,10 +494,6 @@ public:
             return nullptr;
     }
 
-    CBlockIndex *FindMatchingHeader(const CBlockHeader blockHeader) const {
-        return std::find(vChain[0], vChain[Height()], blockHeader);
-    }
-
     /** Return the maximal height in the chain. Is equal to chain.Tip() ? chain.Tip()->nHeight : -1. */
     int Height() const {
         return vChain.size() - 1;
@@ -514,6 +510,9 @@ public:
 
     /** Find the earliest block with timestamp equal or greater than the given. */
     CBlockIndex* FindEarliestAtLeast(int64_t nTime) const;
+
+    /** Find a CBlockIndex with values equal to given CBlockHeader. */
+    CBlockIndex* FindMatchingHeader(const CBlockHeader blockHeader) const;
 };
 
 #endif // BITCOIN_CHAIN_H
