@@ -106,7 +106,9 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, co
         return false;
 
     // Check proof of work matches claimed amount
-    if (proof < targetLowBound || proof > targetUpBound)
+    if (targetLowBound <= targetUpBound && (proof < targetLowBound || proof > targetUpBound))
+        return false;
+    else if (targetUpBound < targetLowBound && (proof < targetLowBound && proof > targetUpBound))
         return false;
 
     return true;
@@ -130,7 +132,9 @@ bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW
         return false;
 
     // Check proof of work matches claimed amount
-    if (proof < targetLowBound || proof > targetUpBound)
+    if (targetLowBound <= targetUpBound && (proof < targetLowBound || proof > targetUpBound))
+        return false;
+    else if (targetUpBound < targetLowBound && (proof < targetLowBound && proof > targetUpBound))
         return false;
 
     return true;
