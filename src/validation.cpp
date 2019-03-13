@@ -2991,11 +2991,11 @@ static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state,
             prevPoW = uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32));
         }
         else {
-            CBlockIndex *pindex = chainActive.FindMatchingHeader(block);
-            if(pindex == nullptr) prevPoW = chainActive.Tip()->GetBlockPoWHash();
-            else prevPoW = pindex->GetAncestor(pindex->nHeight - 1)->GetBlockPoWHash();
+            CBlockIndex *pindex = chainActive.FindOfHash(block.hashPrevBlock);
+            if(pindex != nullptr) prevPoW = pindex->GetBlockPoWHash();
         }
-        if (!CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, prevPoW, consensusParams))
+
+        if (prevPoW != uint256() && !CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, prevPoW, consensusParams))
             return state.DoS(50, false, REJECT_INVALID, "out-of-range-hash", false, "salted merkle failed");
 
         // Check proof of work matches claimed amount

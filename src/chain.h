@@ -511,8 +511,8 @@ public:
     /** Find the earliest block with timestamp equal or greater than the given. */
     CBlockIndex* FindEarliestAtLeast(int64_t nTime) const;
 
-    /** Find a CBlockIndex with values equal to given CBlockHeader. */
-    CBlockIndex* FindMatchingHeader(const CBlockHeader blockHeader) const;
+    /** Find a CBlockIndex with hash equal to given uint256 value. */
+    CBlockIndex* FindOfHash(const uint256 nHash) const;
 };
 
 #endif // BITCOIN_CHAIN_H

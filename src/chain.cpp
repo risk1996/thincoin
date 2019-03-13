@@ -66,10 +66,10 @@ CBlockIndex* CChain::FindEarliestAtLeast(int64_t nTime) const
     return (lower == vChain.end() ? nullptr : *lower);
 }
 
-CBlockIndex* CChain::FindMatchingHeader(const CBlockHeader blockHeader) const
+CBlockIndex* CChain::FindOfHash(const uint256 nHash) const
 {
     std::vector<CBlockIndex*>::const_iterator pindex = std::find_if(vChain.begin(), vChain.end(),
-        [blockHeader](CBlockIndex* pBlock) -> bool { return pBlock->GetBlockHeader() == blockHeader; });
+        [nHash](CBlockIndex* pBlock) -> bool { return pBlock->GetBlockHash() == nHash; });
     return (pindex == vChain.end() ? nullptr : *pindex);
 }
 
