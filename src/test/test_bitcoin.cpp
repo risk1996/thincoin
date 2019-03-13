@@ -154,7 +154,7 @@ TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransaction>&
         IncrementExtraNonce(&block, chainActive.Tip(), extraNonce);
     }
 
-    while (!CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, InsecureRand256(), chainparams.GetConsensus())) ++block.nMerkleSalt;
+    while (!CheckSaltedMerkle(block.GetSaltedMerkle(), block.nBits, chainActive.Tip()->GetBlockPoWHash(), chainparams.GetConsensus())) ++block.nMerkleSalt;
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, block.GetSaltedMerkle(), chainparams.GetConsensus())) ++block.nNonce;
 
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);
