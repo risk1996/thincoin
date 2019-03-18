@@ -72,14 +72,16 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock, uint256 ro
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
     uint256 prevPoW = uint256();
-    CBlockIndex *pindex = chainActive.FindOfHash(root);
+    BlockMap::iterator pindexFind = mapBlockIndex.find(root);
+    CBlockIndex *pindex = pindexFind != mapBlockIndex.end() ? pindexFind->second : nullptr;
     if (pindex != nullptr && pindex->nHeight <= 0) {
         const unsigned char midArrayHex[] =
             "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
             "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
         prevPoW = uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32));
     }
-    else if (pindex != nullptr) prevPoW = chainActive[pindex->nHeight - 1]->GetBlockPoWHash();
+    else if (pindex != nullptr) 
+        prevPoW = pindex->GetBlockPoWHash();
     else {
         std::vector<std::shared_ptr<const CBlock>>::iterator pprev = std::find_if(blocks.begin(), blocks.end(),
             [root](std::shared_ptr<const CBlock> block) -> bool { return block->GetHash() == root; });

@@ -2991,7 +2991,7 @@ static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state,
             prevPoW = uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32));
         }
         else {
-            CBlockIndex *pindex = chainActive.FindOfHash(block.hashPrevBlock);
+            CBlockIndex *pindex = mapBlockIndex.find(block.hashPrevBlock)->second;
             if(pindex != nullptr) prevPoW = pindex->GetBlockPoWHash();
         }
 

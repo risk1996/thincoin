@@ -66,13 +66,6 @@ CBlockIndex* CChain::FindEarliestAtLeast(int64_t nTime) const
     return (lower == vChain.end() ? nullptr : *lower);
 }
 
-CBlockIndex* CChain::FindOfHash(const uint256 nHash) const
-{
-    std::vector<CBlockIndex*>::const_iterator pindex = std::find_if(vChain.begin(), vChain.end(),
-        [nHash](CBlockIndex* pBlock) -> bool { return pBlock->GetBlockHash() == nHash; });
-    return (pindex == vChain.end() ? nullptr : *pindex);
-}
-
 /** Turn the lowest '1' bit in the binary representation of a number into a '0'. */
 int static inline InvertLowestOne(int n) { return n & (n - 1); }
 
