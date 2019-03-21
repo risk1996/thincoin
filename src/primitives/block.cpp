@@ -19,7 +19,7 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     // * Get Proof-of-Work Hash function was using Scrypt, now using Dash's X11.
-    std::vector<unsigned char> vch(80);
+    std::vector<unsigned char> vch(84);
     CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
     ss << *this;
     return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());
@@ -28,7 +28,7 @@ uint256 CBlockHeader::GetPoWHash() const
 uint256 CBlockHeader::GetSaltedMerkle() const
 {
     // * Get Proof-of-Work Salted Merkle Tree Root using X11.
-    std::vector<unsigned char> vch(80);
+    std::vector<unsigned char> vch(36);
     CVectorWriter ss(SER_NETWORK, PROTOCOL_VERSION, vch, 0);
     ss << this->hashMerkleRoot << this->nMerkleSalt;
     return HashX11((const char *)vch.data(), (const char *)vch.data() + vch.size());

@@ -10,6 +10,7 @@
 #include <crypto/sha512.h>
 #include <crypto/hmac_sha256.h>
 #include <crypto/hmac_sha512.h>
+#include <hash.h>
 #include <random.h>
 #include <utilstrencodings.h>
 #include <test/test_bitcoin.h>
@@ -198,6 +199,12 @@ void TestChaCha20(const std::string &hexkey, uint64_t nonce, uint64_t seek, cons
     outres.resize(out.size());
     rng.Output(outres.data(), outres.size());
     BOOST_CHECK(out == outres);
+}
+
+void TestX11(const std::string &in, const std::string &hexout)
+{
+    uint256 out = HashX11(in.begin(), in.end());
+    BOOST_CHECK(out.ToString() == hexout);
 }
 
 std::string LongTestString(void) {
@@ -522,6 +529,13 @@ BOOST_AUTO_TEST_CASE(chacha20_testvector)
                  "a97a5f576fe064025d3ce042c566ab2c507b138db853e3d6959660996546cc9c4a6eafdc777c040d70eaf46f76dad3979e5c5"
                  "360c3317166a1c894c94a371876a94df7628fe4eaaf2ccb27d5aaae0ad7ad0f9d4b6ad3b54098746d4524d38407a6deb3ab78"
                  "fab78c9");
+}
+
+BOOST_AUTO_TEST_CASE(x11_testvector)
+{
+    TestX11("", "ba4e5867eb17cdc33dccb6cc7175256320e2b4627ec221a26e5783902072b551");
+    TestX11("The quick brown fox jumps over the lazy dog", "5cbc66e69d1c11fe78983d2e533bf2c29d440072f7027f44326bf1e4a4364553");
+    TestX11("DASH", "262dc1880be147215bf35dcebed790e0c4e5f8dc2cd36a7f903d75a8bc9e80fe");
 }
 
 BOOST_AUTO_TEST_CASE(countbits_tests)

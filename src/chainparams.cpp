@@ -125,39 +125,27 @@ public:
         nDefaultPort = 7814;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1551398400, 39714, 132946, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
-
-        CBlock *pblock = &genesis;
-        bool fNegative;
-        bool fOverflow;
-        arith_uint256 bnTarget;
-        bnTarget.SetCompact(0x1e0ffff0, &fNegative, &fOverflow);
-        const unsigned char midArrayHex[] =
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
-        const arith_uint256 mid = UintToArith256(uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32)));
-        arith_uint256 low = mid - bnTarget, high = mid + bnTarget, PoWMerkle = UintToArith256(genesis.GetSaltedMerkle()), PoWHash = UintToArith256(genesis.GetPoWHash());
-        while (PoWMerkle < low || PoWMerkle > high) {
-            ++pblock->nMerkleSalt;
-            PoWMerkle = UintToArith256(genesis.GetSaltedMerkle());
-        }
-        low = PoWMerkle;
-        high = PoWMerkle + bnTarget;
-        while (PoWHash < low || PoWHash > high) {
-            ++pblock->nNonce;
-            PoWHash = UintToArith256(genesis.GetPoWHash());
-        }
+        genesis = CreateGenesisBlock(1554076800, 1326622, 4177, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
+        // consensus.hashGenesisBlock = genesis.GetHash();
+        // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
+        //     ++genesis.nMerkleSalt;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
+        // while (!CheckProofOfWork(genesis.GetPoWHash(), genesis.nBits, genesis.GetSaltedMerkle(), consensus)){
+        //     ++genesis.nNonce;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
         
         consensus.hashGenesisBlock = genesis.GetHash();
         // printf("=== Main Params ===\n");
         // printf("Salt  : %d\n", genesis.nMerkleSalt);
         // printf("Nonce : %d\n", genesis.nNonce);
-        // printf("Target: %s\n", bnTarget.ToString().c_str());
         // printf("Hash  : %s\n", genesis.GetHash().ToString().c_str());
         // printf("PoW   : %s\n", genesis.GetPoWHash().ToString().c_str());
         // printf("Merkle: %s\n", genesis.hashMerkleRoot.ToString().c_str());
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0xf5fc80b11a804be6d13909586929e44f482f081dfa008e24095429397c08cfff"));
+        assert(consensus.hashGenesisBlock == uint256S("0x467c9c098b3f2899e4f05cf485eb8a92d45ab3c3e86e5a69df67545950fe3bfd"));
         assert(genesis.hashMerkleRoot == uint256S("0x91da1aa35c09187ca5e35b4a27a92390544b63d91ab5ae363f6aee83f018757b"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
@@ -261,39 +249,27 @@ public:
         nDefaultPort = 17812;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1551398400, 39714, 898318, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
-
-        CBlock *pblock = &genesis;
-        bool fNegative;
-        bool fOverflow;
-        arith_uint256 bnTarget;
-        bnTarget.SetCompact(0x1e0ffff0, &fNegative, &fOverflow);
-        const unsigned char midArrayHex[] =
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
-        const arith_uint256 mid = UintToArith256(uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32)));
-        arith_uint256 low = mid - bnTarget, high = mid + bnTarget, PoWMerkle = UintToArith256(genesis.GetSaltedMerkle()), PoWHash = UintToArith256(genesis.GetPoWHash());
-        while (PoWMerkle < low || PoWMerkle > high) {
-            ++pblock->nMerkleSalt;
-            PoWMerkle = UintToArith256(genesis.GetSaltedMerkle());
-        }
-        low = PoWMerkle;
-        high = PoWMerkle + bnTarget;
-        while (PoWHash < low || PoWHash > high) {
-            ++pblock->nNonce;
-            PoWHash = UintToArith256(genesis.GetPoWHash());
-        }
+        genesis = CreateGenesisBlock(1554076800, 1326622, 4177, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
+        // consensus.hashGenesisBlock = genesis.GetHash();
+        // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
+        //     ++genesis.nMerkleSalt;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
+        // while (!CheckProofOfWork(genesis.GetPoWHash(), genesis.nBits, genesis.GetSaltedMerkle(), consensus)){
+        //     ++genesis.nNonce;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
         
         consensus.hashGenesisBlock = genesis.GetHash();
         // printf("=== TestNet Params ===\n");
         // printf("Salt  : %d\n", genesis.nMerkleSalt);
         // printf("Nonce : %d\n", genesis.nNonce);
-        // printf("Target: %s\n", bnTarget.ToString().c_str());
         // printf("Hash  : %s\n", genesis.GetHash().ToString().c_str());
         // printf("PoW   : %s\n", genesis.GetPoWHash().ToString().c_str());
         // printf("Merkle: %s\n", genesis.hashMerkleRoot.ToString().c_str());
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x41fd70e5b16c7fc3b6ce687bb1f132bc80225314bae2771330b489ac9b43c2da"));
+        assert(consensus.hashGenesisBlock == uint256S("0x467c9c098b3f2899e4f05cf485eb8a92d45ab3c3e86e5a69df67545950fe3bfd"));
         assert(genesis.hashMerkleRoot == uint256S("0x91da1aa35c09187ca5e35b4a27a92390544b63d91ab5ae363f6aee83f018757b"));
 
         vFixedSeeds.clear();
@@ -378,39 +354,27 @@ public:
         nDefaultPort = 17811;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1551398400, 39714, 895115, 0x207fffff, 1, consensus.nInitialSubsidy * COIN);
-
-        CBlock *pblock = &genesis;
-        bool fNegative;
-        bool fOverflow;
-        arith_uint256 bnTarget;
-        bnTarget.SetCompact(0x1e0ffff0, &fNegative, &fOverflow);
-        const unsigned char midArrayHex[] =
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
-        const arith_uint256 mid = UintToArith256(uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32)));
-        arith_uint256 low = mid - bnTarget, high = mid + bnTarget, PoWMerkle = UintToArith256(genesis.GetSaltedMerkle()), PoWHash = UintToArith256(genesis.GetPoWHash());
-        while (PoWMerkle < low || PoWMerkle > high) {
-            ++pblock->nMerkleSalt;
-            PoWMerkle = UintToArith256(genesis.GetSaltedMerkle());
-        }
-        low = PoWMerkle;
-        high = PoWMerkle + bnTarget;
-        while (PoWHash < low || PoWHash > high) {
-            ++pblock->nNonce;
-            PoWHash = UintToArith256(genesis.GetPoWHash());
-        }
+        genesis = CreateGenesisBlock(1554076800, 1326622, 0, 0x207fffff, 1, consensus.nInitialSubsidy * COIN);
+        // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
+        // consensus.hashGenesisBlock = genesis.GetHash();
+        // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
+        //     ++genesis.nMerkleSalt;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
+        // while (!CheckProofOfWork(genesis.GetPoWHash(), genesis.nBits, genesis.GetSaltedMerkle(), consensus)){
+        //     ++genesis.nNonce;
+        //     consensus.hashGenesisBlock = genesis.GetHash();
+        // }
         
         consensus.hashGenesisBlock = genesis.GetHash();
         // printf("=== RegTest Params ===\n");
         // printf("Salt  : %d\n", genesis.nMerkleSalt);
         // printf("Nonce : %d\n", genesis.nNonce);
-        // printf("Target: %s\n", bnTarget.ToString().c_str());
         // printf("Hash  : %s\n", genesis.GetHash().ToString().c_str());
         // printf("PoW   : %s\n", genesis.GetPoWHash().ToString().c_str());
         // printf("Merkle: %s\n", genesis.hashMerkleRoot.ToString().c_str());
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
-        assert(consensus.hashGenesisBlock == uint256S("0x8d0a3764f8983f7372d0d4f04b7fc208a294841948115949798b1a6c078df391"));
+        assert(consensus.hashGenesisBlock == uint256S("0x65d84191699ec2fb4554293f5cfff9645a6756be09230ff4bd259623fe47e8cd"));
         assert(genesis.hashMerkleRoot == uint256S("0x91da1aa35c09187ca5e35b4a27a92390544b63d91ab5ae363f6aee83f018757b"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.

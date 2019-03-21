@@ -74,12 +74,8 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock, uint256 ro
     uint256 prevPoW = uint256();
     BlockMap::iterator pindexFind = mapBlockIndex.find(root);
     CBlockIndex *pindex = pindexFind != mapBlockIndex.end() ? pindexFind->second : nullptr;
-    if (pindex != nullptr && pindex->nHeight <= 0) {
-        const unsigned char midArrayHex[] =
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
-            "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80";
-        prevPoW = uint256(std::vector<unsigned char>(midArrayHex,midArrayHex+32));
-    }
+    if (pindex != nullptr && pindex->nHeight <= 0)
+        prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
     else if (pindex != nullptr) 
         prevPoW = pindex->GetBlockPoWHash();
     else {
