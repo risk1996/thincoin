@@ -166,7 +166,7 @@ public:
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
 
-        checkpointData = { };
+        checkpointData = { { } };
 
         chainTxData = ChainTxData{
             0,
@@ -267,7 +267,7 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = false;
 
-        checkpointData = (CCheckpointData) { };
+        checkpointData = { };
 
         chainTxData = ChainTxData{
             0,
