@@ -248,11 +248,11 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
                 txFirst.push_back(pblock->vtx[0]);
             pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
             pblock->nMerkleSalt = blockinfo[i].merkleSalt;
-            while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, chainActive.Tip()->GetBlockPoWHash(), chainparams.GetConsensus()))
-                ++pblock->nMerkleSalt;
+            // while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, chainActive.Tip()->GetBlockPoWHash(), chainparams.GetConsensus()))
+            //     ++pblock->nMerkleSalt;
             pblock->nNonce = blockinfo[i].nonce;
-            while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), chainparams.GetConsensus()))
-                ++pblock->nNonce;
+            // while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), chainparams.GetConsensus()))
+            //     ++pblock->nNonce;
             // printf("{%d, %#010x, %#010x}%s", blockinfo[i].extranonce, pblock->nMerkleSalt, pblock->nNonce, i % 4 == 3 ? ",\n" : ", "); fflush(stdout);
         }
         std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
