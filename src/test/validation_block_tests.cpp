@@ -74,9 +74,7 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock, uint256 ro
     uint256 prevPoW = uint256();
     BlockMap::iterator pindexFind = mapBlockIndex.find(root);
     CBlockIndex *pindex = pindexFind != mapBlockIndex.end() ? pindexFind->second : nullptr;
-    if (pindex != nullptr && pindex->nHeight <= 0)
-        prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
-    else if (pindex != nullptr) 
+    if (pindex != nullptr) 
         prevPoW = pindex->GetBlockPoWHash();
     else {
         std::vector<std::shared_ptr<const CBlock>>::iterator pprev = std::find_if(blocks.begin(), blocks.end(),
@@ -84,13 +82,10 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock, uint256 ro
         prevPoW = (*pprev)->GetPoWHash();
     }
 
-    while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, prevPoW, Params().GetConsensus())) {
+    while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, prevPoW, Params().GetConsensus()))
         ++pblock->nMerkleSalt;
-    }
-
-    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus())) {
+    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus()))
         ++pblock->nNonce;
-    }
 
     return pblock;
 }
