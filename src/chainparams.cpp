@@ -80,7 +80,7 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 140000; // halving every ~2 years
-        consensus.nInitialSubsidy = 100;
+        consensus.nInitialSubsidy = 100 * COIN;
         consensus.BIP16Height = 218579; // 87afb798a3ad9378fcd56123c81fb31cfd9a8df4719b9774d71730c16315a092 - October 1, 2012
         consensus.BIP34Height = 710000;
         consensus.BIP34Hash = uint256S("fa09d204a83a768ed5a7c8d441fa62f2043abf420cff1226c7b4329aeb9d51cf");
@@ -125,7 +125,7 @@ public:
         nDefaultPort = 7814;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1553260931, 3161101, 545451, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1553260931, 3161101, 545451, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
@@ -183,7 +183,7 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 140000; // halving every ~2 years
-        consensus.nInitialSubsidy = 100;
+        consensus.nInitialSubsidy = 100 * COIN;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on regtest
         consensus.BIP34Height = 76;
         consensus.BIP34Hash = uint256S("8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573");
@@ -223,7 +223,7 @@ public:
         nDefaultPort = 17812;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1553260931, 3161101, 545451, 0x1e0ffff0, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1553260931, 3161101, 545451, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
@@ -283,7 +283,7 @@ public:
     CRegTestParams() {
         strNetworkID = "regtest";
         consensus.nSubsidyHalvingInterval = 150;
-        consensus.nInitialSubsidy = 100;
+        consensus.nInitialSubsidy = 100 * COIN;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on regtest
         consensus.BIP34Height = 100000000; // BIP34 has not activated on regtest (far in the future so block v1 are not rejected in tests)
         consensus.BIP34Hash = uint256();
@@ -319,7 +319,7 @@ public:
         nDefaultPort = 17811;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1553260931, 3161101, 1, 0x207fffff, 1, consensus.nInitialSubsidy * COIN);
+        genesis = CreateGenesisBlock(1553260931, 3161101, 1, 0x207fffff, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
