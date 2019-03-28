@@ -105,7 +105,7 @@ UniValue getnetworkhashps(const JSONRPCRequest& request)
 
 UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript)
 {
-    static const int nInnerLoopCount = 0x10000;
+    static const uint32_t nInnerLoopCount = 0xFFFFFFFF;
     int nHeightEnd = 0;
     int nHeight = 0;
 
@@ -126,11 +126,13 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
             LOCK(cs_main);
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
         }
-        while (nMaxTries > 0 && pblock->nMerkleSalt < nInnerLoopCount && !CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, chainActive.Tip()->GetBlockPoWHash(), Params().GetConsensus())) {
+        while (nMaxTries > 0 && pblock->nMerkleSalt <= nInnerLoopCount &&
+                !CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, chainActive.Tip()->GetBlockPoWHash(), Params().GetConsensus())) {
             ++pblock->nMerkleSalt;
             --nMaxTries;
         }
-        while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus())) {
+        while (nMaxTries > 0 && pblock->nNonce <= nInnerLoopCount &&
+                !CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus())) {
             ++pblock->nNonce;
             --nMaxTries;
         }
