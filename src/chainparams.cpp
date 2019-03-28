@@ -165,7 +165,9 @@ public:
         fRequireStandard = true;
         fMineBlocksOnDemand = false;
 
-        checkpointData = { { } };
+        checkpointData = { {
+            {0, uint256S("0xda2163dbba041be2526a0027d53eaf428a88466d2dfa719a92f77e39ccde9335")},
+        } };
 
         chainTxData = ChainTxData{
             0,
@@ -265,7 +267,9 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = false;
 
-        checkpointData = { };
+        checkpointData = { {
+            {0, uint256S("0xda2163dbba041be2526a0027d53eaf428a88466d2dfa719a92f77e39ccde9335")},
+        } };
 
         chainTxData = ChainTxData{
             0,
@@ -349,7 +353,9 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = true; 
 
-        checkpointData = { };
+        checkpointData = { {
+            {0, uint256S("0x4b0757c8ebc1ce7fb1cbc9d48633b5fb915e2834ac6694391dc41c6f18d4deab")},
+        } };
 
         chainTxData = ChainTxData{
             0,
