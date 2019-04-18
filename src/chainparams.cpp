@@ -53,7 +53,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nMerkleSalt, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "The New York Times 17/Apr/2019 The Chaplain, the Cathedral Fire and the Race to Rescue Notre-Dame’s Relics";
+    const char* pszTimestamp = "The Washington Post 17/Apr/2019 66 minutes: The frantic race to save Notre Dame";
     const CScript genesisOutputScript = CScript() << ParseHex("04e4869ea5eb6bdd725152d34de7006d2efa0bc821655b44dd167988b9be484f2d866e078a7ee4f285284bc3287b7e8cc33812fa99e203ddbe8b848c6744efebb7") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nMerkleSalt, nNonce, nBits, nVersion, genesisReward);
 }
@@ -125,7 +125,7 @@ public:
         nDefaultPort = 7814;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1555576592, 172331, 578015, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
+        genesis = CreateGenesisBlock(1555579052, 412814, 1428668, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
@@ -145,8 +145,8 @@ public:
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
         
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x31c28a80b01d8063c5c8b5f63b4ea1e58d54d2062113b2148c568ce512aad97e"));
-        assert(genesis.hashMerkleRoot == uint256S("0x6f83f55335831d1dd8366fe7dbb1132124d55bc61c56c62e61c80322c2ba6864"));
+        assert(consensus.hashGenesisBlock == uint256S("0x5e21741b1c6f03fe95811fcddf7b4d8a4630c01ac7ee72535b5215213e74cd46"));
+        assert(genesis.hashMerkleRoot == uint256S("0x646e4b13baf53a38b2218e9ebb1e2c21473f230b6b9e906ff2a3e5e98936bbc3"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         // vSeeds.emplace_back("<domain_name>.<tld>");
@@ -166,7 +166,7 @@ public:
         fMineBlocksOnDemand = false;
 
         checkpointData = { {
-            {0, uint256S("0x31c28a80b01d8063c5c8b5f63b4ea1e58d54d2062113b2148c568ce512aad97e")},
+            {0, uint256S("0x5e21741b1c6f03fe95811fcddf7b4d8a4630c01ac7ee72535b5215213e74cd46")},
         } };
 
         chainTxData = ChainTxData{
@@ -225,7 +225,7 @@ public:
         nDefaultPort = 17812;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1555576592, 172331, 578015, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
+        genesis = CreateGenesisBlock(1555579052, 412814, 1428668, 0x1e0ffff0, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
@@ -245,8 +245,8 @@ public:
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
         
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x31c28a80b01d8063c5c8b5f63b4ea1e58d54d2062113b2148c568ce512aad97e"));
-        assert(genesis.hashMerkleRoot == uint256S("0x6f83f55335831d1dd8366fe7dbb1132124d55bc61c56c62e61c80322c2ba6864"));
+        assert(consensus.hashGenesisBlock == uint256S("0x5e21741b1c6f03fe95811fcddf7b4d8a4630c01ac7ee72535b5215213e74cd46"));
+        assert(genesis.hashMerkleRoot == uint256S("0x646e4b13baf53a38b2218e9ebb1e2c21473f230b6b9e906ff2a3e5e98936bbc3"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -268,7 +268,7 @@ public:
         fMineBlocksOnDemand = false;
 
         checkpointData = { {
-            {0, uint256S("0x31c28a80b01d8063c5c8b5f63b4ea1e58d54d2062113b2148c568ce512aad97e")},
+            {0, uint256S("0x5e21741b1c6f03fe95811fcddf7b4d8a4630c01ac7ee72535b5215213e74cd46")},
         } };
 
         chainTxData = ChainTxData{
@@ -323,7 +323,7 @@ public:
         nDefaultPort = 17811;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1555576592, 2, 4, 0x207fffff, 1, consensus.nInitialSubsidy);
+        genesis = CreateGenesisBlock(1555579052, 2, 2, 0x207fffff, 1, consensus.nInitialSubsidy);
         // uint256 prevPoW = uint256S("0x8000000000000000000000000000000000000000000000000000000000000000");
         // consensus.hashGenesisBlock = genesis.GetHash();
         // while (!CheckSaltedMerkle(genesis.GetSaltedMerkle(), genesis.nBits, prevPoW, consensus)) {
@@ -343,8 +343,8 @@ public:
         // printf("SMTR  : %s\n", genesis.GetSaltedMerkle().ToString().c_str());
         
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x2035664d9063bbc6f4af5dbf38e0f77a308a3b84b3489696c6304137865e62c3"));
-        assert(genesis.hashMerkleRoot == uint256S("0x6f83f55335831d1dd8366fe7dbb1132124d55bc61c56c62e61c80322c2ba6864"));
+        assert(consensus.hashGenesisBlock == uint256S("0x84c12aa4ae644bdb44162f7b6860110f7db3b977a2fb12167414d560516ad72b"));
+        assert(genesis.hashMerkleRoot == uint256S("0x646e4b13baf53a38b2218e9ebb1e2c21473f230b6b9e906ff2a3e5e98936bbc3"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
@@ -354,7 +354,7 @@ public:
         fMineBlocksOnDemand = true; 
 
         checkpointData = { {
-            {0, uint256S("0x2035664d9063bbc6f4af5dbf38e0f77a308a3b84b3489696c6304137865e62c3")},
+            {0, uint256S("0x84c12aa4ae644bdb44162f7b6860110f7db3b977a2fb12167414d560516ad72b")},
         } };
 
         chainTxData = ChainTxData{
