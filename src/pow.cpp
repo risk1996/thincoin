@@ -88,7 +88,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     return bnNew.GetCompact();
 }
 
-bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, const Consensus::Params& params)
+bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
@@ -96,10 +96,10 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, co
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
-    targetLowBound = UintToArith256(saltedMerkle);
-    targetUpBound  = targetLowBound + bnTarget;
+    targetUpBound  = UintToArith256(prevPoW);
+    targetLowBound = targetUpBound - bnTarget;
 
-    arith_uint256 proof = UintToArith256(hash);
+    arith_uint256 proof = UintToArith256(saltedMerkle);
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
@@ -114,7 +114,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, co
     return true;
 }
 
-bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW, const Consensus::Params& params)
+bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
@@ -122,10 +122,10 @@ bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
-    targetUpBound  = UintToArith256(prevPoW);
-    targetLowBound = targetUpBound - bnTarget;
+    targetLowBound = UintToArith256(saltedMerkle);
+    targetUpBound  = targetLowBound + bnTarget;
 
-    arith_uint256 proof = UintToArith256(saltedMerkle);
+    arith_uint256 proof = UintToArith256(hash);
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
