@@ -53,28 +53,28 @@ struct {
     unsigned int merkleSalt;
     unsigned int nonce;
 } blockinfo[] = {
-    {4, 0x000364f5, 0x000aad35}, {2, 0x0002d33e, 0x0024c16f}, {1, 0x0014470b, 0x00227b28}, {1, 0x000a212b, 0x001e9224}, {2, 0x0006cb65, 0x00010af5},
-    {2, 0x0012ae00, 0x0003693f}, {1, 0x0014199e, 0x0003b3a3}, {2, 0x000435da, 0x001d656c}, {2, 0x00012c2a, 0x002a6ceb}, {1, 0x001bae6e, 0x0009f34f},
-    {1, 0x00090eee, 0x00021c1e}, {2, 0x00153ca5, 0x001b2445}, {2, 0x0006d2f6, 0x000f9bcb}, {1, 0x000a41b3, 0x0006f5c4}, {2, 0x000994c4, 0x00072d38},
-    {2, 0x0021ed93, 0x0019e74f}, {1, 0x001aea25, 0x0002645d}, {2, 0x00290544, 0x003ac351}, {1, 0x0007f3c4, 0x0028faf6}, {1, 0x00060e5f, 0x00197231},
-    {3, 0x0008f5e0, 0x000157a8}, {2, 0x00054672, 0x00039368}, {2, 0x000304fc, 0x00007952}, {1, 0x000bd82a, 0x0033cff2}, {2, 0x000c0a53, 0x0015a76c},
-    {1, 0x000a5901, 0x000610f4}, {2, 0x00021822, 0x001b041a}, {2, 0x000e3ec5, 0x0000b2ff}, {2, 0x0009f00c, 0x00030681}, {2, 0x00045b95, 0x0023d45a},
-    {2, 0x0016210b, 0x0001db02}, {2, 0x00106c5e, 0x001ffcb4}, {1, 0x00010657, 0x000827f0}, {2, 0x000ba2af, 0x00036c29}, {2, 0x0002fc7d, 0x000885d7},
-    {1, 0x000372f9, 0x00019718}, {2, 0x000a8778, 0x000ac30e}, {1, 0x001743b3, 0x00026fe8}, {2, 0x0005cc13, 0x000192c0}, {1, 0x00344e8f, 0x0001ff27},
-    {1, 0x001de466, 0x00005dc2}, {3, 0x000986af, 0x0003fd7e}, {2, 0x001dd279, 0x000f288d}, {5, 0x002af910, 0x000a074f}, {1, 0x0000a68f, 0x000564b5},
-    {5, 0x004b8873, 0x001ec2ea}, {1, 0x0014f4f7, 0x00065b16}, {1, 0x00158d22, 0x002e5ecd}, {1, 0x00155870, 0x000715b5}, {2, 0x00017649, 0x0005d14b},
-    {1, 0x00147a64, 0x00000a81}, {1, 0x001b1beb, 0x0006b2d2}, {1, 0x002fe362, 0x0015438c}, {1, 0x0001e93f, 0x0004111d}, {5, 0x0007b049, 0x00442d1f},
-    {5, 0x000143f9, 0x0029eb52}, {1, 0x0006adab, 0x0024a735}, {1, 0x0016c300, 0x001012e7}, {6, 0x0008a441, 0x00158f24}, {2, 0x000aad11, 0x001e5b25},
-    {2, 0x0000f72c, 0x000256d8}, {1, 0x0006d3c3, 0x0009ccd5}, {1, 0x0011a2f9, 0x000234f9}, {1, 0x00169f20, 0x00038601}, {2, 0x0002e82c, 0x000a5447},
-    {2, 0x00092d93, 0x00049462}, {1, 0x0003f609, 0x00078124}, {1, 0x000a99d4, 0x000406bc}, {1, 0x0021ae92, 0x00012192}, {5, 0x0006d96c, 0x00272833},
-    {5, 0x001fd9c9, 0x00075291}, {1, 0x00181f97, 0x000b398a}, {1, 0x00068c6e, 0x00029f3f}, {2, 0x0056cfb8, 0x0064da0c}, {2, 0x0003d880, 0x000716a8},
-    {1, 0x000ecb53, 0x000b9882}, {2, 0x000cde4c, 0x0001b1d6}, {1, 0x0009e6cd, 0x0017ff1b}, {2, 0x00122a52, 0x00121ec3}, {2, 0x0009f9ae, 0x0002bb0b},
-    {1, 0x002c01ee, 0x0003c9b2}, {1, 0x001823e8, 0x00207f00}, {1, 0x001c02f4, 0x00081b31}, {5, 0x000c9656, 0x00130a51}, {1, 0x001640a0, 0x0000ddbd},
-    {1, 0x0021167f, 0x00441e6b}, {1, 0x000b2bc8, 0x002d751a}, {1, 0x001f8353, 0x00026b91}, {1, 0x00205532, 0x000814d6}, {1, 0x0008619c, 0x000decc9},
-    {1, 0x0021cbe3, 0x0014528c}, {2, 0x000b53a1, 0x00020e4b}, {0, 0x000cf50c, 0x00064bcd}, {1, 0x00358abf, 0x00269adf}, {2, 0x00089c0f, 0x001d0f48},
-    {2, 0x0013b729, 0x0008279d}, {2, 0x0015454f, 0x00140368}, {1, 0x000a8221, 0x001dd600}, {1, 0x00045404, 0x0001bb97}, {1, 0x000ac4fb, 0x00031d96},
-    {1, 0x001d2923, 0x000054a6}, {1, 0x000672b9, 0x0001abdd}, {1, 0x000043d7, 0x0008318c}, {5, 0x00020f80, 0x000b95fe}, {2, 0x00106599, 0x0041475e},
-    {1, 0x00234dac, 0x0005dc6a}, {1, 0x0006323f, 0x0036abdd}, {1, 0x0013e65b, 0x00029589}, {2, 0x0021707a, 0x00072d2f}, {2, 0x00099c6a, 0x00097f64},
+    {4, 0x07156d, 0x030e86}, {2, 0x0097cd, 0x05ef87}, {1, 0x0aa87d, 0x022072}, {1, 0x1659e3, 0x02f790}, {2, 0x057bda, 0x03cded},
+    {2, 0x031237, 0x0cfa7c}, {1, 0x0c0449, 0x065a0e}, {2, 0x00bc4b, 0x35b727}, {2, 0x1180c5, 0x0b4853}, {1, 0x05752a, 0x1cc848},
+    {1, 0x27dd66, 0x014942}, {2, 0x009287, 0x037f96}, {2, 0x058c2a, 0x022957}, {1, 0x1dc52e, 0x014062}, {2, 0x37e8f3, 0x10cd14},
+    {2, 0x1227c9, 0x06142c}, {1, 0x05392c, 0x34bf6c}, {2, 0x1ceaa2, 0x1747c6}, {1, 0x061757, 0x183e61}, {1, 0x2ccfb6, 0x060ae4},
+    {3, 0x0a5a65, 0x17520e}, {2, 0x00cafe, 0x286ff1}, {2, 0x0715b4, 0x004e6f}, {1, 0x015700, 0x116909}, {2, 0x0a30e7, 0x00ae46},
+    {1, 0x1d19bf, 0x0d7896}, {2, 0x1169ac, 0x0c00cb}, {2, 0x0d19a6, 0x126c7f}, {2, 0x06d9de, 0x050fde}, {2, 0x00811d, 0x04c19c},
+    {2, 0x05045f, 0x281ea4}, {2, 0x0285ef, 0x2cf042}, {1, 0x03841e, 0x00fd26}, {2, 0x0699f0, 0x0f2f63}, {2, 0x3d7625, 0x13cb50},
+    {1, 0x36701b, 0x0182fe}, {2, 0x1bc40c, 0x032c11}, {1, 0x273f44, 0x06472b}, {2, 0x0f7217, 0x06beeb}, {1, 0x009bde, 0x07be81},
+    {1, 0x003f7d, 0x0f3847}, {3, 0x012f64, 0x11ec37}, {2, 0x1f6a7a, 0x0daa36}, {5, 0x013ad6, 0x07e122}, {1, 0x0a042d, 0x0e980e},
+    {5, 0x2bb3b7, 0x0511ab}, {1, 0x023488, 0x0d014f}, {1, 0x00bbb0, 0x06ab39}, {1, 0x1ae9b3, 0x01572d}, {2, 0x11e866, 0x0bbef5},
+    {1, 0x1925cf, 0x03577b}, {1, 0x41f34a, 0x083241}, {1, 0x03ff97, 0x015c4c}, {1, 0x04e187, 0x0aa22e}, {5, 0x0a2490, 0x1198f3},
+    {5, 0x26f2fb, 0x0ae4be}, {1, 0x002a7e, 0x0743f7}, {1, 0x148261, 0x2301be}, {6, 0x003d43, 0x0652d9}, {2, 0x1c2e2c, 0x03b98e},
+    {2, 0x1583a6, 0x1c516b}, {1, 0x18007e, 0x014c2a}, {1, 0x014db0, 0x0233fc}, {1, 0x00787e, 0x061eb1}, {2, 0x019db8, 0x02a197},
+    {2, 0x068df4, 0x0431df}, {1, 0x04ec4f, 0x15b3d0}, {1, 0x001540, 0x25177f}, {1, 0x03d145, 0x03783a}, {5, 0x24dba4, 0x034784},
+    {5, 0x0052e0, 0x009be6}, {1, 0x0f1384, 0x042a64}, {1, 0x202496, 0x053a11}, {2, 0x0de5a9, 0x023736}, {2, 0x165db5, 0x1927d2},
+    {1, 0x0a931e, 0x03fedc}, {2, 0x0d5de9, 0x4a1d06}, {1, 0x02e498, 0x0394ae}, {2, 0x13e447, 0x055def}, {2, 0x1a3849, 0x06b9ac},
+    {1, 0x090097, 0x1d325d}, {1, 0x05659b, 0x1d0b9a}, {1, 0x025443, 0x0241c3}, {5, 0x139ab9, 0x054f88}, {1, 0x061040, 0x186961},
+    {1, 0x1a61b6, 0x18f429}, {1, 0x091363, 0x195fee}, {1, 0x06a1af, 0x022adc}, {1, 0x04a027, 0x0271d3}, {1, 0x0bc5df, 0x0bae68},
+    {1, 0x17b37a, 0x011dc1}, {2, 0x17a1ca, 0x0ef38a}, {0, 0x01bb56, 0x1bf5b7}, {1, 0x07fa9a, 0x13b1c7}, {2, 0x03ef65, 0x070553},
+    {2, 0x06fc1a, 0x001108}, {2, 0x172d2d, 0x0227f3}, {1, 0x0c77e9, 0x0427d7}, {1, 0x0621de, 0x0559dd}, {1, 0x0124fb, 0x128a3b},
+    {1, 0x089f24, 0x1b54e4}, {1, 0x04efa1, 0x17a746}, {1, 0x1232f9, 0x0c11b1}, {5, 0x0fbc91, 0x08621d}, {2, 0x04ca54, 0x008779},
+    {1, 0x0dcb6d, 0x175ff1}, {1, 0x02a051, 0x1e2e7e}, {1, 0x0442e0, 0x443831}, {2, 0x001c07, 0x044fbe}, {2, 0x03f53c, 0x3cea77},
 };
 
 CBlockIndex CreateBlockIndex(int nHeight)
@@ -226,14 +226,11 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
         CBlock *pblock = &pblocktemplate->block; // pointer for convenience
         {
             LOCK(cs_main);
-            pblock->nVersion = 1;
             pblock->nTime = chainActive.Tip()->GetMedianTimePast()+1;
             CMutableTransaction txCoinbase(*pblock->vtx[0]);
             txCoinbase.nVersion = 1;
-            txCoinbase.vin[0].scriptSig = CScript();
-            txCoinbase.vin[0].scriptSig.push_back(blockinfo[i].extranonce);
-            txCoinbase.vin[0].scriptSig.push_back(chainActive.Height());
-            txCoinbase.vout.resize(1); // Ignore the (optional) segwit commitment added by CreateNewBlock (as the hardcoded nonces don't account for this)
+            txCoinbase.vin[0].scriptSig = (CScript() << (chainActive.Height() + 1) << CScriptNum(blockinfo[i].extranonce)) + COINBASE_FLAGS;
+            // txCoinbase.vout.resize(1); // Ignore the (optional) segwit commitment added by CreateNewBlock (as the hardcoded nonces don't account for this)
             txCoinbase.vout[0].scriptPubKey = CScript();
             pblock->vtx[0] = MakeTransactionRef(std::move(txCoinbase));
             if (txFirst.size() == 0)
@@ -247,7 +244,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
             pblock->nNonce = blockinfo[i].nonce;
             // while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), chainparams.GetConsensus()))
             //     ++pblock->nNonce;
-            // printf("{%d, %#010x, %#010x}%s", blockinfo[i].extranonce, pblock->nMerkleSalt, pblock->nNonce, i % 5 == 4 ? ",\n" : ", "); fflush(stdout);
+            // printf("{%d, %#08x, %#08x}%s", blockinfo[i].extranonce, pblock->nMerkleSalt, pblock->nNonce, i % 5 == 4 ? ",\n" : ", "); fflush(stdout);
         }
         std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(*pblock);
         BOOST_CHECK(ProcessNewBlock(chainparams, shared_pblock, true, nullptr));
@@ -369,7 +366,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
 
     // subsidy changing
     int nHeight = chainActive.Height();
-    // Create an actual 209999-long block chain (without valid blocks).
+    // Create an actual 839999-long block chain (without valid blocks).
     while (chainActive.Tip()->nHeight < 839999) {
         CBlockIndex* prev = chainActive.Tip();
         CBlockIndex* next = new CBlockIndex();
@@ -381,7 +378,7 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
         chainActive.SetTip(next);
     }
     BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
-    // Extend to a 210000-long block chain.
+    // Extend to a 840000-long block chain.
     while (chainActive.Tip()->nHeight < 840000) {
         CBlockIndex* prev = chainActive.Tip();
         CBlockIndex* next = new CBlockIndex();
@@ -497,13 +494,14 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     tx.vin[0].nSequence = CTxIn::SEQUENCE_LOCKTIME_TYPE_FLAG | 1;
     BOOST_CHECK(!TestSequenceLocks(tx, flags)); // Sequence locks fail
 
-    BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
+    // BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
+    BOOST_CHECK_EXCEPTION(AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey), std::runtime_error, HasReason("bad-txns-nonfinal"));
 
     // None of the of the absolute height/time locked tx should have made
     // it into the template because we still check IsFinalTx in CreateNewBlock,
     // but relative locked txs will if inconsistently added to mempool.
     // For now these will still generate a valid template until BIP68 soft fork
-    BOOST_CHECK_EQUAL(pblocktemplate->block.vtx.size(), 3);
+    BOOST_CHECK_EQUAL(pblocktemplate->block.vtx.size(), 1);
     // However if we advance height by 1 and time by 512, all of them should be mined
     for (int i = 0; i < CBlockIndex::nMedianTimeSpan; i++)
         chainActive.Tip()->GetAncestor(chainActive.Tip()->nHeight - i)->nTime += 512; //Trick the MedianTimePast
