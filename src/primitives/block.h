@@ -26,6 +26,7 @@ public:
     uint256 hashMerkleRoot;
     uint32_t nTime;
     uint32_t nBits;
+    uint32_t nMerkleSalt;
     uint32_t nNonce;
 
     CBlockHeader()
@@ -42,6 +43,7 @@ public:
         READWRITE(hashMerkleRoot);
         READWRITE(nTime);
         READWRITE(nBits);
+        READWRITE(nMerkleSalt);
         READWRITE(nNonce);
     }
 
@@ -52,6 +54,7 @@ public:
         hashMerkleRoot.SetNull();
         nTime = 0;
         nBits = 0;
+        nMerkleSalt = 0;
         nNonce = 0;
     }
 
@@ -64,9 +67,21 @@ public:
 
     uint256 GetPoWHash() const;
 
+    uint256 GetSaltedMerkle() const;
+
     int64_t GetBlockTime() const
     {
         return (int64_t)nTime;
+    }
+
+    std::string ToString() const;
+
+    bool operator==(CBlockHeader block)
+    {
+        return (nVersion == block.nVersion && hashPrevBlock == block.hashPrevBlock &&
+                hashMerkleRoot == block.hashMerkleRoot && nTime == block.nTime &&
+                nBits == block.nBits && nMerkleSalt == block.nMerkleSalt &&
+                nNonce == block.nNonce);
     }
 };
 
@@ -114,6 +129,7 @@ public:
         block.hashMerkleRoot = hashMerkleRoot;
         block.nTime          = nTime;
         block.nBits          = nBits;
+        block.nMerkleSalt    = nMerkleSalt;
         block.nNonce         = nNonce;
         return block;
     }

@@ -67,25 +67,37 @@ std::shared_ptr<CBlock> Block(const uint256& prev_hash)
     return pblock;
 }
 
-std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock)
+std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock, uint256 root, std::vector<std::shared_ptr<const CBlock>>& blocks)
 {
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
-    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
-        ++(pblock->nNonce);
+    uint256 prevPoW = uint256();
+    BlockMap::iterator pindexFind = mapBlockIndex.find(root);
+    CBlockIndex *pindex = pindexFind != mapBlockIndex.end() ? pindexFind->second : nullptr;
+    if (pindex != nullptr) 
+        prevPoW = pindex->GetBlockPoWHash();
+    else {
+        std::vector<std::shared_ptr<const CBlock>>::iterator pprev = std::find_if(blocks.begin(), blocks.end(),
+            [root](std::shared_ptr<const CBlock> block) -> bool { return block->GetHash() == root; });
+        prevPoW = (*pprev)->GetPoWHash();
     }
+
+    while (!CheckSaltedMerkle(pblock->GetSaltedMerkle(), pblock->nBits, prevPoW, Params().GetConsensus()))
+        ++pblock->nMerkleSalt;
+    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, pblock->GetSaltedMerkle(), Params().GetConsensus()))
+        ++pblock->nNonce;
 
     return pblock;
 }
 
 // construct a valid block
-const std::shared_ptr<const CBlock> GoodBlock(const uint256& prev_hash)
+const std::shared_ptr<const CBlock> GoodBlock(const uint256& prev_hash, std::vector<std::shared_ptr<const CBlock>>& blocks)
 {
-    return FinalizeBlock(Block(prev_hash));
+    return FinalizeBlock(Block(prev_hash), prev_hash, blocks);
 }
 
 // construct an invalid block (but with a valid header)
-const std::shared_ptr<const CBlock> BadBlock(const uint256& prev_hash)
+const std::shared_ptr<const CBlock> BadBlock(const uint256& prev_hash, std::vector<std::shared_ptr<const CBlock>>& blocks)
 {
     auto pblock = Block(prev_hash);
 
@@ -96,7 +108,7 @@ const std::shared_ptr<const CBlock> BadBlock(const uint256& prev_hash)
     CTransactionRef tx = MakeTransactionRef(coinbase_spend);
     pblock->vtx.push_back(tx);
 
-    auto ret = FinalizeBlock(pblock);
+    auto ret = FinalizeBlock(pblock, prev_hash, blocks);
     return ret;
 }
 
@@ -107,14 +119,14 @@ void BuildChain(const uint256& root, int height, const unsigned int invalid_rate
     bool gen_invalid = GetRand(100) < invalid_rate;
     bool gen_fork = GetRand(100) < branch_rate;
 
-    const std::shared_ptr<const CBlock> pblock = gen_invalid ? BadBlock(root) : GoodBlock(root);
+    const std::shared_ptr<const CBlock> pblock = gen_invalid ? BadBlock(root, blocks) : GoodBlock(root, blocks);
     blocks.push_back(pblock);
     if (!gen_invalid) {
         BuildChain(pblock->GetHash(), height - 1, invalid_rate, branch_rate, max_size, blocks);
     }
 
     if (gen_fork) {
-        blocks.push_back(GoodBlock(root));
+        blocks.push_back(GoodBlock(root, blocks));
         BuildChain(blocks.back()->GetHash(), height - 1, invalid_rate, branch_rate, max_size, blocks);
     }
 }

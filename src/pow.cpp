@@ -39,7 +39,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     }
 
     // Go back by what we want to be 14 days worth of blocks
-    // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // Thincoin: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
     int blockstogoback = params.DifficultyAdjustmentInterval()-1;
     if ((pindexLast->nHeight+1) != params.DifficultyAdjustmentInterval())
@@ -72,7 +72,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     arith_uint256 bnOld;
     bnNew.SetCompact(pindexLast->nBits);
     bnOld = bnNew;
-    // Litecoin: intermediate uint256 can overflow by 1 bit
+    // Thincoin: intermediate uint256 can overflow by 1 bit
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     bool fShift = bnNew.bits() > bnPowLimit.bits() - 1;
     if (fShift)
@@ -88,20 +88,53 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     return bnNew.GetCompact();
 }
 
-bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
+bool CheckSaltedMerkle(uint256 saltedMerkle, unsigned int nBits, uint256 prevPoW, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
-    arith_uint256 bnTarget;
+    arith_uint256 bnTarget, targetLowBound, targetUpBound;
 
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    targetUpBound  = UintToArith256(prevPoW);
+    targetLowBound = targetUpBound - bnTarget;
+
+    arith_uint256 proof = UintToArith256(saltedMerkle);
 
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
         return false;
 
     // Check proof of work matches claimed amount
-    if (UintToArith256(hash) > bnTarget)
+    if (targetLowBound <= targetUpBound && (proof < targetLowBound || proof > targetUpBound))
+        return false;
+    else if (targetUpBound < targetLowBound && (proof < targetLowBound && proof > targetUpBound))
+        return false;
+
+    return true;
+}
+
+bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, const Consensus::Params& params)
+{
+    bool fNegative;
+    bool fOverflow;
+    arith_uint256 bnTarget, targetLowBound, targetUpBound;
+
+    bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+
+    targetLowBound = UintToArith256(saltedMerkle);
+    targetUpBound  = targetLowBound + bnTarget;
+
+    arith_uint256 proof = UintToArith256(hash);
+
+    // Check range
+    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
+        return false;
+
+    // Check proof of work matches claimed amount
+    if (targetLowBound <= targetUpBound && (proof < targetLowBound || proof > targetUpBound))
+        return false;
+    else if (targetUpBound < targetLowBound && (proof < targetLowBound && proof > targetUpBound))
         return false;
 
     return true;

@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(get_next_work)
     pindexLast.nHeight = 280223;
     pindexLast.nTime = 1358378777;  // Block #280223
     pindexLast.nBits =  0x1c0ac141;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1c093f8d);
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1c049fc6);
 }
 
 /* Test the constraint on the upper bound for next work */
@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_pow_limit)
     pindexLast.nHeight = 2015;
     pindexLast.nTime = 1318480354;  // Block #2015
     pindexLast.nBits = 0x1e0ffff0;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1e0fffff);
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1e0d6e43);
 }
 
 /* Test the constraint on the lower bound for actual time taken */
@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(get_next_work_upper_limit_actual)
     pindexLast.nHeight = 1001951;
     pindexLast.nTime = 1464900315;  // Block #46367
     pindexLast.nBits = 0x1b015318;
-    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1b054c60);
+    BOOST_CHECK_EQUAL(CalculateNextWorkRequired(&pindexLast, nLastRetargetTime, chainParams->GetConsensus()), 0x1b02a669);
 }
 
 BOOST_AUTO_TEST_CASE(GetBlockProofEquivalentTime_test)
