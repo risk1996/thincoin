@@ -18,7 +18,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params&);
 
 /** Check whether a block hash satisfies the proof-of-work requirement specified by nBits */
-bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, const Consensus::Params&);
 bool CheckSaltedMerkle(uint256 hash, unsigned int nBits, uint256 prevPoW, const Consensus::Params& params);
+bool CheckProofOfWork(uint256 hash, unsigned int nBits, uint256 saltedMerkle, const Consensus::Params&);
 
 #endif // BITCOIN_POW_H
