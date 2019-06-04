@@ -46,8 +46,6 @@ BOOST_AUTO_TEST_CASE(InterblockHash_validity)
             CBlockIndex *pblock = chainActive[i];
             CBlockIndex *pprev  = chainActive[i - skip - 1];
             CBlockIndex *pnext  = chainActive[i + skip + 1];
-            // printf("skip: %d, i: %d\n", skip, i);
-            // printf("%s\n%s\n", pprev->ToString().c_str(), pblock->ToString().c_str());
             arith_uint256 bnTarget, targetLowBound, targetUpBound, skipLowTarget, skipMidTarget, skipUpTarget;
             arith_uint256 MAX_VERIFIABLE = UintToArith256(uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
@@ -66,26 +64,21 @@ BOOST_AUTO_TEST_CASE(InterblockHash_validity)
             skipLowTarget  = bnTarget * skip;
             skipMidTarget  = bnTarget * (skip + 1);
             skipUpTarget   = bnTarget * (skip + 2);
-            // printf("skp: %s + %s = %s\n", skipLowTarget.ToString().c_str(), bnTarget.ToString().c_str(), skipUpTarget.ToString().c_str());
 
             // Validate previous blocks' hash valid range of PoW with skip
             arith_uint256 prevSaltedMerkle = UintToArith256(pprev->GetBlockSaltedMerkle());
             arith_uint256 prevPoW = UintToArith256(pprev->GetBlockPoWHash());
             targetLowBound = blockSaltedMerkle - skipMidTarget;
             targetUpBound  = blockSaltedMerkle + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), prevSaltedMerkle.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, prevSaltedMerkle, targetUpBound));
             targetLowBound = blockPoW - skipUpTarget;
             targetUpBound  = blockPoW + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), prevSaltedMerkle.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, prevSaltedMerkle, targetUpBound));
             targetLowBound = blockSaltedMerkle - skipLowTarget;
             targetUpBound  = blockSaltedMerkle + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), prevPoW.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, prevPoW, targetUpBound));
             targetLowBound = blockPoW - skipMidTarget;
             targetUpBound  = blockPoW + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), prevPoW.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, prevPoW, targetUpBound));
 
             // Validate next blocks' hash valid range of PoW with skip
@@ -93,19 +86,15 @@ BOOST_AUTO_TEST_CASE(InterblockHash_validity)
             arith_uint256 nextPoW = UintToArith256(pnext->GetBlockPoWHash());
             targetLowBound = blockSaltedMerkle - skipMidTarget;
             targetUpBound  = blockSaltedMerkle + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), nextSaltedMerkle.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, nextSaltedMerkle, targetUpBound));
             targetLowBound = blockPoW - skipMidTarget;
             targetUpBound  = blockPoW + skipLowTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), nextSaltedMerkle.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, nextSaltedMerkle, targetUpBound));
             targetLowBound = blockSaltedMerkle - skipMidTarget;
             targetUpBound  = blockSaltedMerkle + skipUpTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), nextPoW.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, nextPoW, targetUpBound));
             targetLowBound = blockPoW - skipMidTarget;
             targetUpBound  = blockPoW + skipMidTarget;
-            // printf("%s < %s < %s ?\n", targetLowBound.ToString().c_str(), nextPoW.ToString().c_str(), targetUpBound.ToString().c_str());
             BOOST_ASSERT(BetweenWithWrapping(targetLowBound, nextPoW, targetUpBound));
         }
     }
@@ -123,8 +112,6 @@ BOOST_AUTO_TEST_CASE(InterblockTransaction_validity)
             CBlockIndex *pblock = chainActive[i];
             CBlockIndex *pprev  = chainActive[i - skip - 1];
             CBlockIndex *pnext  = chainActive[i + skip + 1];
-            // printf("skip: %d, i: %d\n", skip, i);
-            // printf("%s\n%s\n", pprev->ToString().c_str(), pblock->ToString().c_str());
             arith_uint256 bnTarget, targetLowBound, targetUpBound, skipLowTarget, skipMidTarget, skipUpTarget;
             arith_uint256 MAX_VERIFIABLE = UintToArith256(uint256S("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
