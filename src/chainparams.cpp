@@ -79,7 +79,7 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 140000; // halving every ~2 years
+        consensus.nSubsidyHalvingInterval = 140000; // halving every ~4 years
         consensus.nInitialSubsidy = 100 * COIN;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 0;
@@ -173,7 +173,7 @@ class CTestNetParams : public CChainParams {
 public:
     CTestNetParams() {
         strNetworkID = "test";
-        consensus.nSubsidyHalvingInterval = 140000; // halving every ~2 years
+        consensus.nSubsidyHalvingInterval = 140000; // halving every ~4 years
         consensus.nInitialSubsidy = 100 * COIN;
         consensus.BIP16Height = 0;
         consensus.BIP34Height = 0;

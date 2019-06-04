@@ -61,9 +61,9 @@ struct Params {
     /** Block height at which BIP66 becomes active */
     int BIP66Height;
     /**
-     * Minimum blocks including miner confirmation of the total of 2016 blocks in a retargeting period,
-     * (nPowTargetTimespan / nPowTargetSpacing) which is also used for BIP9 deployments.
-     * Examples: 1916 for 95%, 1512 for testchains.
+     * Minimum blocks including miner confirmation of the total of 2688 blocks in a retargeting period,
+     * (nPowTargetTimespan / nPowTargetSpacing * 4) which is also used for BIP9 deployments.
+     * Examples: 2016 for 75%.
      */
     uint32_t nRuleChangeActivationThreshold;
     uint32_t nMinerConfirmationWindow;
